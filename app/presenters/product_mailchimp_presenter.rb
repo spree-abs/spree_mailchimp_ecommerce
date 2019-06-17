@@ -14,7 +14,7 @@ module SpreeMailchimpEcommerce
           id: Digest::MD5.hexdigest(product.id.to_s),
           title: product.name || "",
           description: product.description || "",
-          url: "#{ENV['BASE_URL']}/#{product.category&.permalink || 'products'}/#{product.slug}",
+          url: "#{::Rails.application.routes.url_helpers.spree_url}/#{product.category&.permalink || 'products'}/#{product.slug}" || "",
           vendor: product.category&.name || "",
           image_url: image_url,
           variants: variants
@@ -28,10 +28,7 @@ module SpreeMailchimpEcommerce
       end
 
       def image_url
-        image = product.images.first
-        return "" unless image
-
-        Rails.application.routes.url_helpers.rails_blob_url(image.attachment)
+        product.mailchimp_image_url
       end
     end
   end
