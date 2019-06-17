@@ -7,9 +7,9 @@ end
 
 gem "spree", github: "spree/spree", branch: "master"
 
-# Provides basic authentication functionality for testing parts of your engine
-gem "gibbon"
+gem "gibbon", "~> 3.2.0"
 gem "highline"
+gem "pry"
 gem "rails-controller-testing"
 gem "rubocop-rspec", require: false
 gem "spree_auth_devise", github: "spree/spree_auth_devise", branch: "master"
