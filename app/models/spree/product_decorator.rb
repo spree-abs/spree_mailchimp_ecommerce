@@ -12,10 +12,19 @@ module Spree
       end
 
       def mailchimp_image_url
-        images.first&.attachment&.url || ""
+        Gem.loaded_specs["rails"].version >= Gem::Version.new('5.0.0') ? active_storage_url : paperclip_url
       end
 
       private
+
+      def paperclip_url
+        images.first&.attachment&.url
+      end
+
+      def active_storage_url
+        return '' unless images.any?
+        Rails.application.routes.url_helpers.rails_blob_url(images.first&.attachment)
+      end
 
       def create_mailchimp_product
         ::SpreeMailchimpEcommerce::CreateProductJob.perform_later(id)
