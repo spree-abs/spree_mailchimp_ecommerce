@@ -23,7 +23,7 @@ module SpreeMailchimpEcommerce
 
         { campaign_id: order.mailchimp_campaign_id,
           landing_site: 'https://dev.worldabs.com',
-          financial_status: 'paid',
+          financial_status: 'pending',
           fulfillment_status: ''
          }.as_json
       end
