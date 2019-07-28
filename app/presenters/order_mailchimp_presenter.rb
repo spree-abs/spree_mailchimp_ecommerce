@@ -21,7 +21,11 @@ module SpreeMailchimpEcommerce
       def campaign_id
         return {} unless order.mailchimp_campaign_id
 
-        { campaign_id: order.mailchimp_campaign_id }.as_json
+        { campaign_id: order.mailchimp_campaign_id,
+          landing_site: 'https://dev.worldabs.com',
+          financial_status: 'paid',
+          fulfillment_status: ''
+         }.as_json
       end
 
       def user

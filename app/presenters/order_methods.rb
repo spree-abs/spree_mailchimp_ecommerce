@@ -7,6 +7,7 @@ module OrderMethods
       customer: user,
       landing_site: 'https://dev.worldabs.com',
       financial_status: 'paid',
+      fulfillment_status: '',
       currency_code: order.currency || order.store&.default_currency || ::Spree::Config[:currency],
       order_total: (order.total || 0).to_s,
       lines: lines
