@@ -4,7 +4,7 @@ module Spree
       def self.prepended(base)
         base.before_update :create_mailchimp_cart, if: proc { email_changed? }
         base.state_machine.after_transition to: :complete, do: :after_create_jobs
-        base.state_machine.after_transition to: :canceled, do: :after_cancel_jobs
+        base.state_machine.after_transition to: :shipped, do: :order_shipped_notification
       end
 
       def associate_user!(user, override_email = true)
@@ -77,7 +77,7 @@ module Spree
       end
 
       def order_shipped_notification
-        @notification = { fulfillment_status: "shipped" }.as_json
+        @notification = { fulfillment_status: shipment_state }.as_json
       end
 
       def order_refunded_notification
