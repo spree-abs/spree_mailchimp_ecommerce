@@ -68,7 +68,7 @@ module Spree
       end
 
       def new_order_notification
-        state = payment_state == "paid" ? "pending" : "pending"
+        state = payment_state == "paid" ? "paid" : "pending"
         @notification = { financial_status: state }.as_json
       end
 
@@ -77,7 +77,7 @@ module Spree
       end
 
       def order_shipped_notification
-        @notification = { fulfillment_status: shipment_state }.as_json
+        @notification = { fulfillment_status: "shipped" }.as_json
       end
 
       def order_refunded_notification
